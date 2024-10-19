@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    # Definir os stages
+    // Definir os stages
     stages {
         stage('Build Docker Image') {
             stepes {
