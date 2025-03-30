@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     dir('scr') {
-                        dockerImage = docker.build("https://${HARBOR_URL}/${HARBOR_PROJECT}/${IMAGE_NAME}:${IMAGE_TAG}")
+                        dockerImage = docker.build("${HARBOR_URL}/${HARBOR_PROJECT}/${IMAGE_NAME}:${IMAGE_TAG}")
                     }
                 }
             }
