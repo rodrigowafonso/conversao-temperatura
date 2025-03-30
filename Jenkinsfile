@@ -27,7 +27,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry("https://${HARBOR_URL}","${HARBOR_CREDENTIALS}") {
+                    docker.withRegistry("https://${HARBOR_URL}","env.HARBOR_CREDENTIALS") {
                         dockerImage.push()
                     }
                 }
