@@ -4,6 +4,8 @@ pipeline {
         HARBOR_URL = credentials('HARBOR_URL')
         HARBOR_PROJECT = credentials('HARBOR_PROJECT')
         HARBOR_CREDENTIALS = credentials('HARBOR_CREDENTIALS')
+        IMAGE_NAME = credentials('IMAGEM_NAME')
+        IMAGE_TAG = credentials('IMAGE_TAG')
     }
     // Definir os stages
     stages {
@@ -14,13 +16,13 @@ pipeline {
         }     
         stage('Build Docker Image') {
             steps {
-                sh 'echo "Executando o comando Docker Build"'
+                dockerImage = docker.build("https://${HARBOR_URL}/${HARBOR_PROJECT}/${IMAGE_NAME}:${IMAGE_TAG}")
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                sh 'echo "Executando o comando Docker Push"'
+                docker.withRegistry("https://${HARBOR_URL}","${HARBOR_CREDENTIALS}")
             }
         }
 
