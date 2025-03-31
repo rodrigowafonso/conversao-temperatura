@@ -33,12 +33,11 @@ pipeline {
                 }
             }
         }
-
-        post {
-            cleanup {
-                sh 'docker system prune -f'
-            }
-        }
     }
 
+    post {
+        cleanup {
+            sh 'docker system prune -f'
+        }
+    }
 }
