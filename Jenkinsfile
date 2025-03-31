@@ -27,7 +27,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://"$HARBOR_URL"','HARBOR_CREDENTIALS') {
+                    docker.withRegistry('https://harbor.focopontovirtual.com.br','HARBOR_CREDENTIALS') {
                         dockerImage.push()
                     }
                 }
