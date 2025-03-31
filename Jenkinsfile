@@ -29,7 +29,14 @@ pipeline {
                 script {
                     docker.withRegistry('https://harbor.focopontovirtual.com.br','HARBOR_CREDENTIALS') {
                         dockerImage.push()
+                        rocketSend channel: 'jenkins', message: "Build success - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", emoji: ':jenkins:', color: 'green', rawMessage: true
                     }
+                }
+            }
+            post {
+                failure {
+                    echo 'FAILED (in stage NotOK)'
+                    rocketSend channel: 'jenkins', message: "Build FAIL - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", emoji: ':jenkins_devil:', color: 'red', rawMessage: true
                 }
             }
         }
